@@ -7,7 +7,7 @@ class Product(models.Model):
     product_id = models.IntegerField()
 
     class Meta:
-        ordering = ('-product_id',)
+        ordering = ('product_id',)
 
     def __str__(self):
         return self.product_name

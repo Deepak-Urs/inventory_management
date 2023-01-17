@@ -1,0 +1,119 @@
+[
+    {   
+        "model": "product.Product",
+        "pk": 1,
+        "fields": {
+            "mass_g":700,
+            "product_name":"RBC A+ Adult",
+            "product_id":0
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 2,
+        "fields": {
+            "mass_g":700,
+            "product_name":"RBC B+ Adult",
+            "product_id":1
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 3,
+        "fields": {
+            "mass_g":750,
+            "product_name":"RBC AB+ Adult",
+            "product_id":2
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 4,
+        "fields": {
+            "mass_g":680,
+            "product_name":"RBC O- Adult",
+            "product_id":3
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 5,
+        "fields": {
+            "mass_g":350,
+            "product_name":"RBC A+ Child",
+            "product_id":4
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 6,
+        "fields": {
+            "mass_g":200,
+            "product_name":"RBC AB+ Child",
+            "product_id":5
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 7,
+        "fields": {
+            "mass_g":120,
+            "product_name":"PLT AB+",
+            "product_id":6
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 8,
+        "fields": {
+            "mass_g":80,
+            "product_name":"PLT O+",
+            "product_id":7
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 9,
+        "fields": {
+            "mass_g":40,
+            "product_name":"CRYO A+",
+            "product_id":8
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 10,
+        "fields": {
+            "mass_g":80,
+            "product_name":"CRYO AB+",
+            "product_id":9
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 11,
+        "fields": {
+            "mass_g":300,
+            "product_name":"FFP A+",
+            "product_id":10
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 12,
+        "fields": {
+            "mass_g":300,
+            "product_name":"FFP B+",
+            "product_id":11
+        }
+    },
+    {   
+        "model": "product.Product",
+        "pk": 1,
+        "fields": {
+            "mass_g":300,
+            "product_name":"FFP AB+",
+            "product_id":12
+        }
+    }
+ ]
