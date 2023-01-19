@@ -20,7 +20,7 @@ class Order(models.Model):
         ordering = ('order_id',)
 
 class Summary(models.Model):
-    order_id = models.ForeignKey(Order, related_name='orders', on_delete=models.CASCADE)
+    order_id = models.ForeignKey(Order, related_name='Order', on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, related_name='Product', on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
