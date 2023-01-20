@@ -30,6 +30,7 @@ class ProcessOrder(APIView):
 
 def ship_package2(partRecord):
     print('\n\n\nship_package2 input seen', partRecord, '\n\n\n')
+    
     #print('partRecord[quantity] seen', partRecord['item']['quantity'])
     #for i in range(partRecord['item']['quantity']):
     #    print(i)
@@ -38,6 +39,9 @@ def ship_package2(partRecord):
 
 def ship_package(lookupRes): #change name?? check once
         # ACTUAL SHIP PACKAGE LOGIC (maybe recursive)
+    if len(lookupRes) == 0:
+        return
+
     WEIGHT_LIMIT = 1800
     shippedRecord = {
         #'order_id': payload.data['order_id'], #model-> Order.objects()
@@ -47,6 +51,7 @@ def ship_package(lookupRes): #change name?? check once
     #Second approach
     latestWeight = 0
     lookupResCopy = list(lookupRes)
+    print('LISTED lookupRes', lookupRes)
     for i in lookupRes:
         packageWeightNow = 0
         for j in range(1, i['quantity']+1):
@@ -71,46 +76,34 @@ def ship_package(lookupRes): #change name?? check once
                     'item_num': jseen-2,
                     'item': partFulfilled
                 }
-                print('packageWeightNow Trimmed in ELSE', packageWeightNow)
-                print('latestWeight Trimmed in ELSE', latestWeight)
-                print('partRecord recursive breakpoint-- in ELSE', partRecord)
-                print('partRecord-item-num in ELSE', partRecord['item_num'])
-                print('checking i[quantity] in  in ELSE', i['quantity'])
+                #print('packageWeightNow Trimmed in ELSE', packageWeightNow)
+                #print('latestWeight Trimmed in ELSE', latestWeight)
+                #print('partRecord recursive breakpoint-- in ELSE', partRecord)
+                #print('partRecord-item-num in ELSE', partRecord['item_num'])
+                #print('checking i[quantity] in  in ELSE', i['quantity'])
 
                 if partRecord['item_num'] != i['quantity']:
-                    print('\n\npartRecord going for recursion-- in ELSE', partRecord)
-                    print('recursive compute call until the weight comes under 1.8kg and then print it out\n\n\n') 
+                    #print('\n\npartRecord going for recursion-- in ELSE', partRecord)
+                    #print('recursive compute call until the weight comes under 1.8kg and then print it out\n\n\n') 
                     
-                    print('\n\n\n\n\nCHECK lookupResCopy', lookupResCopy)
-                    print('CHECK partRecord', partRecord['item'])
+                    #print('\n\n\n\n\nCHECK lookupResCopy', lookupResCopy)
+                    #print('CHECK partRecord', partRecord['item'])
                     #lookupResCopy[partRecord['item']['product_id']]['quantity'] =  partRecord['item']['quantity']
                     for i in range(len((lookupResCopy))):
                         if lookupResCopy[i]['product_id'] == partRecord['item']['product_id']:
                             lookupResCopy[i]['quantity'] = partRecord['item']['quantity']          
-                        #for j in range(partRecord['item'])):
-                            #print('i-', i)
-                            #print('j-', j)
-                            #if i['product_id'] == j['product_id']:
-                            #    i['quantity'] = j['product_id']
-
-                    #for i in lookupResCopy:
-                    #    for j in partRecord['item']:
-                    #        if int(i['product_id']) == int(j['product_id']):
-                    #            i['quantity'] = j['quantity']
 
                     print('updated lookupResCopy in ELSE', lookupResCopy)
                     print('updated partRecord in ELSE', partRecord)
-                    ship_package2(lookupResCopy)
+                    ship_package(lookupResCopy)
                     return
                     #recursive compute call until the weight comes under 1.8kg and then print it out
-                #break
+                    #break
 
 
         print('end of an object list')
         if latestWeight < WEIGHT_LIMIT:
-                #latestWeightSeen = packageWeight
                 print('WEIGHT_LIMIT----', WEIGHT_LIMIT, '\n')
-                #print('packageWeight before logging to DB', packageWeight, '\n')
                 shippedRecord['shipped'].append({'product_id': i['product_id'], 'quantity': i['quantity']})
                 print('shippedRecord seen', shippedRecord)
                 #pop the completed lookup entry
@@ -158,11 +151,12 @@ def process_order(request):
     newRec = []
 
     # orderRequest
+    #is this coreect????
     for i in request.data['requested']:
         for j in lookupRes:
             if i['product_id'] == j['product_id']:
                 j['quantity'] = i['quantity']
-    print('new lookupRes', lookupRes)
+    #print('new lookupRes', lookupRes)
     ####ADDING PRE_SHIP_PACKAGE LOGIC
 
     #1ship_package(request)
