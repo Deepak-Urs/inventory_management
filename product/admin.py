@@ -11,7 +11,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('order_id',)
 
 class SummaryAdmin(admin.ModelAdmin):
-    list_display = ('order_id',)
+    list_display = ('order_id','product_id','quantity')
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)

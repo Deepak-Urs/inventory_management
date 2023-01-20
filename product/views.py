@@ -83,7 +83,14 @@ def ship_package(lookupRes): #change name?? check once
             
                     print('23.shippedRecord seen OFFICIAL--', shippedRecord)
                     #setup Summary table push operation -
-                    #Summary.objects.create()
+                    orderId = Order.objects.values()[latestId-1]['order_id']
+                    for i in shippedRecord['shipped']:    
+                        #Summary.objects.create(
+                        #    order_id = Order.objects.filter(order_id=i['order_id']),
+                        #    product_id= Product.objects.filter(product_id=i['product_id']),
+                        #    qty = i['quantity']
+                        #)
+                        Summary.objects.create(order_id=orderId,product_id=i['product_id'],quantity=i['quantity'])
                     ship_package(lookupResCopy)
                     #break
                     return
