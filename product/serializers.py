@@ -26,5 +26,5 @@ class SummarySerializer(serializers.ModelSerializer):
         fields = (
             "order_id",
             "product_id",
-            "qunatity"
+            "quantity"
         )
