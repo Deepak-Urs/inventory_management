@@ -36,8 +36,9 @@ def ship_package(lookupRes): #change name?? check once
         return
 
     WEIGHT_LIMIT = 1800
+    latestId = Order.objects.all().count()
     shippedRecord = {
-        'order_id': Order.objects.values()[0]['order_id'], #model-> Order.objects()
+        'order_id': Order.objects.values()[latestId-1]['order_id'], #model-> Order.objects()
         'shipped': []
     }
 
@@ -142,9 +143,12 @@ def ship_package(lookupRes): #change name?? check once
 @api_view(['POST'])    
 def process_order(request):
     # storing order-id in orders table
-    query = request.data
+    #query = request.data
 
-    Order.objects.create(order_id=query['order_id'])
+    newId = Order.objects.all().count() +1
+    Order.objects.create(order_id=newId)
+    
+
     #make the above id as a auto incrwmnet value
     
     ####ADDING PRE_SHIP_PACKAGE LOGIC
